@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`, // or '.env'
+})
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -6,6 +10,24 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `50xtmvh0ku7f`,
+        // Learn about environment variables: https://gatsby.dev/env-vars
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `baskerville\: 400`,
+          `muli\:300,700`, // you can also specify font weights and styles
+        ],
+        // display: 'swap'
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
